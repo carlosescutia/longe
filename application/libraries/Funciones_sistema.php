@@ -17,8 +17,8 @@ class Funciones_sistema extends CI_Controller {
         $id_rol = $this->CI->session->userdata('id_rol');
         $id_usuario = $this->CI->session->userdata('id_usuario');
         $data['id_usuario'] = $id_usuario;
-        $data['id_organizacion'] = $this->CI->session->userdata('id_organizacion');
-        $data['nom_organizacion'] = $this->CI->session->userdata('nom_organizacion');
+        $data['id_comunidad'] = $this->CI->session->userdata('id_comunidad');
+        $data['nom_comunidad'] = $this->CI->session->userdata('nom_comunidad');
         $data['id_rol'] = $id_rol;
         $data['nom_usuario'] = $this->CI->session->userdata('nom_usuario');
         $data['error'] = $this->CI->session->flashdata('error');
@@ -50,14 +50,14 @@ class Funciones_sistema extends CI_Controller {
         // registro en bitacora
         $usuario = $this->CI->session->userdata('usuario');
         $nom_usuario = $this->CI->session->userdata('nom_usuario');
-        $nom_organizacion = $this->CI->session->userdata('nom_organizacion');
+        $nom_comunidad = $this->CI->session->userdata('nom_comunidad');
         $data = array(
             'fecha' => date("Y-m-d"),
             'hora' => date("H:i"),
             'origen' => $_SERVER['REMOTE_ADDR'],
             'usuario' => $usuario,
             'nom_usuario' => $nom_usuario,
-            'nom_organizacion' => $nom_organizacion,
+            'nom_comunidad' => $nom_comunidad,
             'accion' => $accion,
             'entidad' => $entidad,
             'valor' => $valor

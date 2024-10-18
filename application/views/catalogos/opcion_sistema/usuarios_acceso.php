@@ -5,7 +5,7 @@
     <div class="card-body">
         <ul>
         <?php foreach( $usuarios_acceso as $usuarios_acceso_item) { ?>
-            <li><?= $usuarios_acceso_item['nom_usuario'] ?> - <?= $usuarios_acceso_item['nom_organizacion'] ?></li>
+            <li><?= $usuarios_acceso_item['nom_usuario'] ?> - <?= $usuarios_acceso_item['nom_comunidad'] ?></li>
         <?php } ?>
         </ul>
     </div>

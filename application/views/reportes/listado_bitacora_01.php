@@ -28,7 +28,7 @@
                             <option value="usuario" <?= ($entidad == 'usuario') ? 'selected' : '' ?>>usuario</option>
                             <option value="opcion_sistema" <?= ($entidad == 'opcion_sistema') ? 'selected' : '' ?>>opcion_sistema</option>
                             <option value="acceso_sistema" <?= ($entidad == 'acceso_sistema') ? 'selected' : '' ?>>acceso_sistema</option>
-                            <option value="organizacion" <?= ($entidad == 'organizacion') ? 'selected' : '' ?>>organizacion</option>
+                            <option value="comunidad" <?= ($entidad == 'comunidad') ? 'selected' : '' ?>>comunidad</option>
                         </select>
                     </div>
                     <div class="col-1">
@@ -52,7 +52,7 @@
                         <th scope="col">Origen</th>
                         <th scope="col">Usuario</th>
                         <th scope="col">Nombre de usuario</th>
-                        <th scope="col">organizacion</th>
+                        <th scope="col">comunidad</th>
                         <th scope="col">Acción</th>
                         <th scope="col">Entidad</th>
                         <th scope="col">Valor</th>
@@ -67,7 +67,7 @@
                         <td><?= $bitacora_item['origen'] ?></td>
                         <td><?= $bitacora_item['usuario'] ?></td>
                         <td><?= $bitacora_item['nom_usuario'] ?></td>
-                        <td><?= $bitacora_item['nom_organizacion'] ?></td>
+                        <td><?= $bitacora_item['nom_comunidad'] ?></td>
                         <td><?= $bitacora_item['accion'] ?></td>
                         <td><?= $bitacora_item['entidad'] ?></td>
                         <td><?= $bitacora_item['valor'] ?></td>

@@ -63,7 +63,7 @@
                         </ul>
                     </div>
                     <div class="col-sm-5 text-end">
-                        <p class="m-2 texto-titulo"><?php echo $nom_usuario ?> · <?php echo $nom_organizacion ?> | <a class="m-2 texto-titulo d-print-none" href="<?= base_url() ?>admin/cerrar_sesion">Cerrar sesión</a></p>
+                        <p class="m-2 texto-titulo"><?php echo $nom_usuario ?> · <?php echo $nom_comunidad ?> | <a class="m-2 texto-titulo d-print-none" href="<?= base_url() ?>admin/cerrar_sesion">Cerrar sesión</a></p>
                     </div>
                 </div> <!-- opciones del menu -->
             </div>

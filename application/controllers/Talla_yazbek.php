@@ -1,11 +1,11 @@
 <?php
-class Organizacion extends CI_Controller {
+class Talla_yazbek extends CI_Controller {
 
     public function __construct()
     {
         parent::__construct();
         $this->load->library('funciones_sistema');
-        $this->load->model('organizacion_model');
+        $this->load->model('talla_yazbek_model');
     }
 
     public function index()
@@ -16,14 +16,14 @@ class Organizacion extends CI_Controller {
             $data += $this->funciones_sistema->get_system_params();
 
             $permisos_requeridos = array(
-                'organizacion.can_edit',
+                'talla_yazbek.can_edit',
             );
             if (has_permission_or($permisos_requeridos, $data['permisos_usuario'])) {
-                $data['organizaciones'] = $this->organizacion_model->get_organizaciones();
+                $data['tallas_yazbek'] = $this->talla_yazbek_model->get_tallas_yazbek();
 
                 $this->load->view('templates/admheader', $data);
                 $this->load->view('templates/dlg_borrar');
-                $this->load->view('catalogos/organizacion/lista', $data);
+                $this->load->view('catalogos/talla_yazbek/lista', $data);
                 $this->load->view('templates/footer', $data);
             } else {
                 redirect(base_url() . 'admin');
@@ -33,7 +33,7 @@ class Organizacion extends CI_Controller {
         }
     }
 
-    public function detalle($id_organizacion)
+    public function detalle($id_talla_yazbek)
     {
         if ($this->session->userdata('logueado')) {
             $data = [];
@@ -41,13 +41,13 @@ class Organizacion extends CI_Controller {
             $data += $this->funciones_sistema->get_system_params();
 
             $permisos_requeridos = array(
-                'organizacion.can_edit',
+                'talla_yazbek.can_edit',
             );
             if (has_permission_or($permisos_requeridos, $data['permisos_usuario'])) {
-                $data['organizacion'] = $this->organizacion_model->get_organizacion($id_organizacion);
+                $data['talla_yazbek'] = $this->talla_yazbek_model->get_talla_yazbek($id_talla_yazbek);
 
                 $this->load->view('templates/admheader', $data);
-                $this->load->view('catalogos/organizacion/detalle', $data);
+                $this->load->view('catalogos/talla_yazbek/detalle', $data);
                 $this->load->view('templates/footer', $data);
             } else {
                 redirect(base_url() . 'admin');
@@ -64,22 +64,23 @@ class Organizacion extends CI_Controller {
             $data += $this->funciones_sistema->get_userdata();
 
             $permisos_requeridos = array(
-                'organizacion.can_edit',
+                'talla_yazbek.can_edit',
             );
             if (has_permission_or($permisos_requeridos, $data['permisos_usuario'])) {
                 // guardado
                 $data = array(
-                    'nom_organizacion' => null,
+                    'nom_talla_yazbek' => null,
                 );
-                $id_organizacion = $this->organizacion_model->guardar($data, null);
+                $id_talla_yazbek = $this->talla_yazbek_model->guardar($data, null);
 
                 // registro en bitacora
                 $accion = 'agregó';
-                $entidad = 'organizacion';
-                $valor = $id_organizacion;
+                $entidad = 'talla_yazbek';
+                $valor = $id_talla_yazbek;
                 $this->funciones_sistema->registro_bitacora($accion, $entidad, $valor);
 
-                $this->detalle($id_organizacion);
+                $this->detalle($id_talla_yazbek);
+
             } else {
                 redirect(base_url() . 'admin');
             }
@@ -88,56 +89,52 @@ class Organizacion extends CI_Controller {
         }
     }
 
-    public function guardar($id_organizacion=null)
+    public function guardar($id_talla_yazbek=null)
     {
         if ($this->session->userdata('logueado')) {
 
-            $nueva_organizacion = is_null($id_organizacion);
+            $talla_yazbek = $this->input->post();
+            if ($talla_yazbek) {
 
-            $organizacion = $this->input->post();
-            if ($organizacion) {
-
-                if ($id_organizacion) {
+                if ($id_talla_yazbek) {
                     $accion = 'modificó';
                 } else {
                     $accion = 'agregó';
                 }
-
                 // guardado
                 $data = array(
-                    'nom_organizacion' => $organizacion['nom_organizacion']
+                    'nom_talla_yazbek' => $talla_yazbek['nom_talla_yazbek'],
+                    'orden' => $talla_yazbek['orden'],
                 );
-                $id_organizacion = $this->organizacion_model->guardar($data, $id_organizacion);
+                $id_talla_yazbek = $this->talla_yazbek_model->guardar($data, $id_talla_yazbek);
 
                 // registro en bitacora
-                $entidad = 'organizacion';
-                $valor = $id_organizacion . " " . $organizacion['nom_organizacion'];
+                $entidad = 'talla_yazbek';
+                $valor = $id_talla_yazbek . " " . $talla_yazbek['nom_talla_yazbek'];
                 $this->funciones_sistema->registro_bitacora($accion, $entidad, $valor);
 
             }
-
-            redirect(base_url() . 'organizacion');
+            redirect(base_url() . 'talla_yazbek');
 
         } else {
             redirect(base_url() . 'admin/login');
         }
     }
 
-    public function eliminar($id_organizacion)
+    public function eliminar($id_talla_yazbek)
     {
         if ($this->session->userdata('logueado')) {
 
             // registro en bitacora
-            $organizacion = $this->organizacion_model->get_organizacion($id_organizacion);
+            $talla_yazbek = $this->talla_yazbek_model->get_talla_yazbek($id_talla_yazbek);
             $accion = 'eliminó';
-            $entidad = 'organizacion';
-            $valor = $id_organizacion . " " . $organizacion['nom_organizacion'];
+            $entidad = 'talla_yazbek';
+            $valor = $id_talla_yazbek . " " . $talla_yazbek['nom_talla_yazbek'];
             $this->funciones_sistema->registro_bitacora($accion, $entidad, $valor);
 
             // eliminado
-            $this->organizacion_model->eliminar($id_organizacion);
-
-            redirect(base_url() . 'organizacion');
+            $this->talla_yazbek_model->eliminar($id_talla_yazbek);
+            redirect(base_url() . 'talla_yazbek');
 
         } else {
             redirect(base_url() . 'admin/login');

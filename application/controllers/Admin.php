@@ -53,8 +53,8 @@ class Admin extends CI_Controller {
             if ($usuario_db) {
                 $usuario_data = array(
                     'id_usuario' => $usuario_db['id_usuario'],
-                    'id_organizacion' => $usuario_db['id_organizacion'],
-                    'nom_organizacion' => $usuario_db['nom_organizacion'],
+                    'id_comunidad' => $usuario_db['id_comunidad'],
+                    'nom_comunidad' => $usuario_db['nom_comunidad'],
                     'id_rol' => $usuario_db['id_rol'],
                     'nom_usuario' => $usuario_db['nom_usuario'],
                     'usuario' => $usuario_db['usuario'],

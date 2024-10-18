@@ -25,7 +25,7 @@
                 <li class="nav-item">&nbsp;</li>
                 <li class="nav-item">&nbsp;</li>
                 <li class="nav-item">&nbsp;</li>
-                <li class="nav-item"><i class="bi bi-envelope"></i> <?= $correo_org_sitio ?? 'contacto@organizacion.inet' ?> &nbsp; </li>
+                <li class="nav-item"><i class="bi bi-envelope"></i> <?= $correo_org_sitio ?? 'contacto@comunidad.inet' ?> &nbsp; </li>
             </ul>
         </footer>
 

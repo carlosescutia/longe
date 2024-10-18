@@ -7,14 +7,14 @@ class Usuario_model extends CI_Model {
 
     public function usuario_por_nombre($usuario, $password) {
         $sql = ""
-            ."select u.id_usuario, u.nom_usuario, u.usuario, u.id_organizacion, o.nom_organizacion, u.id_rol, r.nom_rol "
+            ."select u.id_usuario, u.nom_usuario, u.usuario, u.id_comunidad, c.nom_comunidad, u.id_rol, r.nom_rol "
             ."from usuario u "
             ."left join rol r on r.id_rol = u.id_rol "
-            ."left join organizacion o on o.id_organizacion = u.id_organizacion "
+            ."left join comunidad c on c.id_comunidad = u.id_comunidad "
             ."where "
             ."u.usuario = ? "
             ."and password = ? "
-            ."and activo = 1 "
+            ."and u.activo = 1 "
             ."";
         $query = $this->db->query($sql, array($usuario, $password));
         return $query->row_array();
@@ -23,12 +23,12 @@ class Usuario_model extends CI_Model {
     public function get_usuarios() {
         $sql = ""
             ."select "
-            ."u.*, r.nom_rol, o.nom_organizacion, "
+            ."u.*, r.nom_rol, c.nom_comunidad, "
             ."(select count(*) from acceso_sistema_usuario asu where asu.id_usuario = u.id_usuario) as num_permisos "
             ."from "
             ."usuario u "
             ."left join rol r on u.id_rol = r.id_rol "
-            ."left join organizacion o on u.id_organizacion = o.id_organizacion "
+            ."left join comunidad c on u.id_comunidad = c.id_comunidad "
             ."order by "
             ."u.id_usuario "
             ."";
@@ -38,10 +38,10 @@ class Usuario_model extends CI_Model {
 
     public function get_usuario($id_usuario) {
         $sql = ""
-            ."select u.*, o.nom_organizacion, r.nom_rol "
+            ."select u.*, c.nom_comunidad, r.nom_rol "
             ."from usuario u "
             ."left join rol r on u.id_rol = r.id_rol "
-            ."left join organizacion o on u.id_organizacion = o.id_organizacion "
+            ."left join comunidad c on u.id_comunidad = c.id_comunidad "
             ."where u.id_usuario = ? "
             ."";
         $query = $this->db->query($sql, array($id_usuario));
