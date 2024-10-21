@@ -1,16 +1,17 @@
 <div class="my-3 pb-2 border-bottom">
-    <h2>Inicio</h2>
+    <h2><?= $nom_comunidad ?></h2>
 </div>
 
-<div class="area-contenido">
+<div class="area-contenido mt-5">
     <div class="row">
-        <div class="col-md-8">
-            <div class="col-md-12">
-                <?php include "bienvenida.php"; ?>
-            </div>
+        <div class="col-md-4">
+            <?php include "personas.php"; ?>
         </div>
-        <div class="col-md-3 offset-md-1">
-            <img src="<?=base_url();?>img/documentos.jpg" class="img-fluid rounded">
+        <div class="col-md-4">
+            <?php include "operaciones.php"; ?>
+        </div>
+        <div class="col-md-4">
+            <?php include "eventos.php"; ?>
         </div>
     </div>
 </div>

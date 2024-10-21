@@ -13,7 +13,7 @@ class Persona_model extends CI_Model {
         if ($id_rol == 'adm') {
             $sql .= 'or p.id_comunidad is null ';
         }
-        $sql .= 'order by p.id_persona ';
+        $sql .= 'order by p.fecha_ingreso desc ';
         $query = $this->db->query($sql, $id_comunidad);
         return $query->result_array();
     }

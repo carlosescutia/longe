@@ -108,14 +108,13 @@ INSERT INTO organizacion (nom_organizacion) VALUES
     ('Lorem Ipsum');
 
 INSERT INTO usuario (id_organizacion, id_rol, nom_usuario, usuario, password, activo) VALUES
-    (1,'adm','Administrador','admon','hola',1),
-    (1,'usr','Usuario1','usuario1','hola',1);
+    (1,'adm','Administrador','admon','hola',1);
 
 INSERT INTO parametro_sistema (nom_parametro_sistema, valor) VALUES
-    ('nom_sitio_corto','RoboCtrl'),
-    ('nom_sitio_largo','Panel de control de Robocop'),
-    ('nom_org_sitio','OCP'),
-    ('anio_org_sitio','2087'),
+    ('nom_sitio_corto','Longe'),
+    ('nom_sitio_largo','Sistema de información'),
+    ('nom_org_sitio','LdM'),
+    ('anio_org_sitio','2024'),
     ('tel_org_sitio','(555) 1123 4579'),
-    ('correo_org_sitio','ed209@ocp.com'),
-    ('logo_org_sitio','logo_ocp.png');
+    ('correo_org_sitio','mestre@longe.com'),
+    ('logo_org_sitio','logo_ldm.png');
