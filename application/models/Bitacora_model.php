@@ -11,7 +11,7 @@ class Bitacora_model extends CI_Model {
         return $result;
     }
 
-    public function get_bitacora($usuario, $nom_organizacion, $id_rol, $accion, $entidad, $salida)
+    public function get_bitacora($usuario, $nom_comunidad, $id_rol, $accion, $entidad, $salida)
     {
         $this->load->dbutil();
 
@@ -20,15 +20,15 @@ class Bitacora_model extends CI_Model {
         }
         if ($id_rol == 'adm') {
             $usuario = '%';
-            $nom_organizacion = '%';
+            $nom_comunidad = '%';
         }
-        $sql = "select b.* from bitacora b where b.usuario LIKE ? and b.nom_organizacion LIKE ? ";
+        $sql = "select b.* from bitacora b where b.usuario LIKE ? and b.nom_comunidad LIKE ? ";
         if ($id_rol !== 'adm') {
             $sql .= " and b.usuario not in (select usuario from usuario where id_rol = 'adm')";
         }
         $parametros = array();
         array_push($parametros, "$usuario");
-        array_push($parametros, "$nom_organizacion");
+        array_push($parametros, "$nom_comunidad");
         if ($accion <> "") {
             $sql .= ' and b.accion = ?';
             array_push($parametros, "$accion");

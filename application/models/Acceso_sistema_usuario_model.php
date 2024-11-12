@@ -21,7 +21,7 @@ class Acceso_sistema_usuario_model extends CI_Model {
 
     public function get_usuarios_acceso($id_opcion_sistema) {
         // Devuelve usuarios con acceso a una opción
-        $sql = 'select asu.id_usuario, u.nom_usuario, o.nom_organizacion from acceso_sistema_usuario asu left join opcion_sistema ops on ops.cod_opcion_sistema = asu.cod_opcion_sistema left join usuario u on u.id_usuario = asu.id_usuario left join organizacion o on o.id_organizacion = u.id_organizacion where ops.id_opcion_sistema = ? ;';
+        $sql = 'select asu.id_usuario, u.nom_usuario, c.nom_comunidad from acceso_sistema_usuario asu left join opcion_sistema ops on ops.cod_opcion_sistema = asu.cod_opcion_sistema left join usuario u on u.id_usuario = asu.id_usuario left join comunidad c on c.id_comunidad = u.id_comunidad where ops.id_opcion_sistema = ? ;';
         $query = $this->db->query($sql, array($id_opcion_sistema));
         return $query->result_array();
     }

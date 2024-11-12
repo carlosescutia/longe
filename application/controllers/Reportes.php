@@ -59,9 +59,9 @@ class Reportes extends CI_Controller {
                 $data['entidad'] = $entidad;
                 $id_rol = $data['id_rol'];
 
-                $nom_organizacion = $this->session->userdata['nom_organizacion'];
+                $nom_comunidad = $this->session->userdata['nom_comunidad'];
                 $usuario = $this->session->userdata['usuario'];
-                $data['bitacora'] = $this->bitacora_model->get_bitacora($usuario, $nom_organizacion, $id_rol, $accion, $entidad, $salida);
+                $data['bitacora'] = $this->bitacora_model->get_bitacora($usuario, $nom_comunidad, $id_rol, $accion, $entidad, $salida);
 
                 if ($salida == 'csv') {
                     force_download("listado_bitacora_01.csv", $data['bitacora']);

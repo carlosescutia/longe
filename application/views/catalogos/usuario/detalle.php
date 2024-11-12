@@ -36,11 +36,11 @@
             </div>
         </div>
         <div class="form-group row">
-            <label for="id_organizacion" class="col-sm-2 col-form-label">organizacion</label>
+            <label for="id_comunidad" class="col-sm-2 col-form-label">comunidad</label>
             <div class="col-sm-3">
-                <select class="form-select" name="id_organizacion" id="id_organizacion">
-                    <?php foreach ($organizaciones as $organizaciones_item) { ?>
-                    <option value="<?= $organizaciones_item['id_organizacion'] ?>" <?= ($usuario['id_organizacion'] == $organizaciones_item['id_organizacion']) ? 'selected' : '' ?> ><?= $organizaciones_item['nom_organizacion'] ?></option>
+                <select class="form-select" name="id_comunidad" id="id_comunidad">
+                    <?php foreach ($comunidades as $comunidades_item) { ?>
+                    <option value="<?= $comunidades_item['id_comunidad'] ?>" <?= ($usuario['id_comunidad'] == $comunidades_item['id_comunidad']) ? 'selected' : '' ?> ><?= $comunidades_item['nom_comunidad'] ?></option>
                     <?php } ?>
                 </select>
             </div>

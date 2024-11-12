@@ -25,7 +25,7 @@
                     <p class="small"><strong>Usuario</strong></p>
                 </div>
                 <div class="col-2 align-self-center">
-                    <p class="small"><strong>Org.</strong></p>
+                    <p class="small"><strong>Comunidad</strong></p>
                 </div>
                 <div class="col-1 align-self-center">
                     <p class="small"><strong>Rol</strong></p>
@@ -53,7 +53,7 @@
                     <p><?= $usuarios_item['usuario'] ?></p>
                 </div>
                 <div class="col-2 align-self-center">
-                    <p><?= $usuarios_item['nom_organizacion'] ?></p>
+                    <p><?= $usuarios_item['nom_comunidad'] ?></p>
                 </div>
                 <div class="col-1 align-self-center">
                     <p><?= $usuarios_item['id_rol'] ?></p>
@@ -66,7 +66,7 @@
                 </div>
                 <div class="col-1 align-self-center">
                     <?php 
-                    $item_eliminar = $usuarios_item['id_usuario'] ." " . $usuarios_item['nom_usuario'] . " - " . $usuarios_item['nom_organizacion'] ;
+                    $item_eliminar = $usuarios_item['id_usuario'] ." " . $usuarios_item['nom_usuario'] . " - " . $usuarios_item['nom_comunidad'] ;
                     $url = base_url() . "usuario/eliminar/". $usuarios_item['id_usuario']; 
                     ?>
                     <p><a href="#dlg_borrar" data-bs-toggle="modal" onclick="pass_data('<?=$item_eliminar?>', '<?=$url?>')" ><i class="bi bi-x-circle boton-eliminar" ></i>

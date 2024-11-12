@@ -9,11 +9,41 @@
             <div class="row mb-3 gy-3">
                 <?php
                     $permisos_requeridos = array(
-                    'organizacion.can_edit',
+                    'grupo.can_edit',
                     );
                     if (has_permission_or($permisos_requeridos, $permisos_usuario)) { ?>
-                        <div class="col-sm-4">
-                            <?php include "organizacion/boton.php" ?>
+                        <div class="col-md-4">
+                            <?php include "grupo/boton.php" ?>
+                        </div>
+                    <?php }
+                ?>
+                <?php
+                    $permisos_requeridos = array(
+                    'comunidad.can_edit',
+                    );
+                    if (has_permission_or($permisos_requeridos, $permisos_usuario)) { ?>
+                        <div class="col-md-4">
+                            <?php include "comunidad/boton.php" ?>
+                        </div>
+                    <?php }
+                ?>
+                <?php
+                    $permisos_requeridos = array(
+                    'persona.can_edit',
+                    );
+                    if (has_permission_or($permisos_requeridos, $permisos_usuario)) { ?>
+                        <div class="col-md-4">
+                            <?php include "persona/boton.php" ?>
+                        </div>
+                    <?php }
+                ?>
+                <?php
+                    $permisos_requeridos = array(
+                    'talla_yazbek.can_edit',
+                    );
+                    if (has_permission_or($permisos_requeridos, $permisos_usuario)) { ?>
+                        <div class="col-md-4">
+                            <?php include "talla_yazbek/boton.php" ?>
                         </div>
                     <?php }
                 ?>

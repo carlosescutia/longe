@@ -1,13 +1,13 @@
 <?php
-class Usuario extends CI_Controller {
+class Persona extends CI_Controller {
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
         $this->load->library('funciones_sistema');
-        $this->load->model('usuario_model');
-        $this->load->model('rol_model');
+        $this->load->model('persona_model');
         $this->load->model('comunidad_model');
-        $this->load->model('acceso_sistema_usuario_model');
+        $this->load->model('talla_yazbek_model');
     }
 
     public function index()
@@ -18,14 +18,14 @@ class Usuario extends CI_Controller {
             $data += $this->funciones_sistema->get_system_params();
 
             $permisos_requeridos = array(
-                'usuario.can_edit',
+                'persona.can_edit',
             );
             if (has_permission_or($permisos_requeridos, $data['permisos_usuario'])) {
-                $data['usuarios'] = $this->usuario_model->get_usuarios();
+                $data['personas'] = $this->persona_model->get_personas($data['id_comunidad'], $data['id_rol']);
 
                 $this->load->view('templates/admheader', $data);
                 $this->load->view('templates/dlg_borrar');
-                $this->load->view('catalogos/usuario/lista', $data);
+                $this->load->view('catalogos/persona/lista', $data);
                 $this->load->view('templates/footer', $data);
             } else {
                 redirect(base_url() . 'admin');
@@ -35,7 +35,7 @@ class Usuario extends CI_Controller {
         }
     }
 
-    public function detalle($id_usuario)
+    public function detalle($id_persona)
     {
         if ($this->session->userdata('logueado')) {
             $data = [];
@@ -43,19 +43,16 @@ class Usuario extends CI_Controller {
             $data += $this->funciones_sistema->get_system_params();
 
             $permisos_requeridos = array(
-                'usuario.can_edit',
+                'persona.can_edit',
             );
             if (has_permission_or($permisos_requeridos, $data['permisos_usuario'])) {
-                $data['usuario'] = $this->usuario_model->get_usuario($id_usuario);
-                $data['roles'] = $this->rol_model->get_roles();
+                $data['persona'] = $this->persona_model->get_persona($id_persona);
                 $data['comunidades'] = $this->comunidad_model->get_comunidades($data['id_comunidad'], $data['id_rol']);
-                $data['accesos_sistema_rol'] = $this->acceso_sistema_model->get_accesos_sistema_rol_usuario($id_usuario);
-                $data['accesos_sistema_usuario'] = $this->acceso_sistema_usuario_model->get_accesos_sistema_usuario($id_usuario);
-                $data['opciones_sistema_otorgables'] = $this->opcion_sistema_model->get_opciones_sistema_otorgables();
+                $data['instructores'] = $this->persona_model->get_instructores($data['id_comunidad'], $data['id_rol']);
+                $data['tallas_yazbek'] = $this->talla_yazbek_model->get_tallas_yazbek();
 
                 $this->load->view('templates/admheader', $data);
-                $this->load->view('templates/dlg_borrar');
-                $this->load->view('catalogos/usuario/detalle', $data);
+                $this->load->view('catalogos/persona/detalle', $data);
                 $this->load->view('templates/footer', $data);
             } else {
                 redirect(base_url() . 'admin');
@@ -72,22 +69,22 @@ class Usuario extends CI_Controller {
             $data += $this->funciones_sistema->get_userdata();
 
             $permisos_requeridos = array(
-                'usuario.can_edit',
+                'persona.can_edit',
             );
             if (has_permission_or($permisos_requeridos, $data['permisos_usuario'])) {
                 // guardado
                 $data = array(
                     'id_comunidad' => null,
                 );
-                $id_usuario = $this->usuario_model->guardar($data, null);
+                $id_persona = $this->persona_model->guardar($data, null);
 
                 // registro en bitacora
                 $accion = 'agregó';
-                $entidad = 'usuario';
-                $valor = $id_usuario ;
+                $entidad = 'persona';
+                $valor = $id_persona;
                 $this->funciones_sistema->registro_bitacora($accion, $entidad, $valor);
 
-                $this->detalle($id_usuario);
+                $this->detalle($id_persona);
 
             } else {
                 redirect(base_url() . 'admin');
@@ -97,62 +94,63 @@ class Usuario extends CI_Controller {
         }
     }
 
-    public function guardar($id_usuario=null)
+    public function guardar($id_persona=null)
     {
         if ($this->session->userdata('logueado')) {
 
-            $usuario = $this->input->post();
-            if ($usuario) {
+            $persona = $this->input->post();
+            if ($persona) {
 
-                if ($id_usuario) {
+                if ($id_persona) {
                     $accion = 'modificó';
                 } else {
                     $accion = 'agregó';
                 }
                 // guardado
                 $data = array(
-                    'id_comunidad' => empty($usuario['id_comunidad']) ? null : $usuario['id_comunidad'],
-                    'id_rol' => $usuario['id_rol'],
-                    'nom_usuario' => $usuario['nom_usuario'],
-                    'usuario' => $usuario['usuario'],
-                    'password' => $usuario['password'],
-                    'activo' => empty($usuario['activo']) ? null : $usuario['activo'],
+                    'id_comunidad' => empty($persona['id_comunidad']) ? null : $persona['id_comunidad'],
+                    'id_instructor_inicial' => empty($persona['id_instructor_inicial']) ? null : $persona['id_instructor_inicial'],
+                    'id_instructor_actual' => empty($persona['id_instructor_actual']) ? null : $persona['id_instructor_actual'],
+                    'nom_persona' => $persona['nom_persona'],
+                    'fecha_ingreso' => empty($persona['fecha_ingreso']) ? null : $persona['fecha_ingreso'],
+                    'sexo' => $persona['sexo'],
+                    'id_talla_yazbek' => empty($persona['id_talla_yazbek']) ? null : $persona['id_talla_yazbek'],
+                    'es_instructor' => empty($persona['es_instructor']) ? null : $persona['es_instructor'],
+                    'activo' => empty($persona['activo']) ? null : $persona['activo'],
                 );
-                $id_usuario = $this->usuario_model->guardar($data, $id_usuario);
+                $id_persona = $this->persona_model->guardar($data, $id_persona);
 
                 // registro en bitacora
-                $comunidad = $this->comunidad_model->get_comunidad($usuario['id_comunidad']);
-                $separador = ' -> ';
-                $entidad = 'usuario';
-                $valor = $id_usuario ." ". $usuario['nom_usuario'] . $separador . $comunidad['nom_comunidad'];
+                $entidad = 'persona';
+                $valor = $id_persona . " " . $persona['nom_persona'];
                 $this->funciones_sistema->registro_bitacora($accion, $entidad, $valor);
 
             }
-            redirect(base_url() . 'usuario');
+            redirect(base_url() . 'persona');
 
         } else {
             redirect(base_url() . 'admin/login');
         }
     }
 
-    public function eliminar($id_usuario)
+    public function eliminar($id_persona)
     {
         if ($this->session->userdata('logueado')) {
 
             // registro en bitacora
-            $datos_usuario = $this->usuario_model->get_usuario($id_usuario);
-            $separador = ' -> ';
+            $persona = $this->persona_model->get_persona($id_persona);
             $accion = 'eliminó';
-            $entidad = 'usuario';
-            $valor = $id_usuario ." ". $datos_usuario['nom_usuario'] . $separador . $datos_usuario['nom_comunidad'];
+            $entidad = 'persona';
+            $valor = $id_persona . " " . $persona['nom_persona'];
             $this->funciones_sistema->registro_bitacora($accion, $entidad, $valor);
 
             // eliminado
-            $this->usuario_model->eliminar($id_usuario);
+            $this->persona_model->eliminar($id_persona);
+            redirect(base_url() . 'persona');
 
-            redirect(base_url() . 'usuario');
         } else {
             redirect(base_url() . 'admin/login');
         }
     }
+
 }

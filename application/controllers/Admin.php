@@ -6,6 +6,7 @@ class Admin extends CI_Controller {
         parent::__construct();
         $this->load->library('funciones_sistema');
         $this->load->model('usuario_model');
+        $this->load->model('persona_model');
     }
 
     public function index()
@@ -14,6 +15,8 @@ class Admin extends CI_Controller {
             $data = [];
             $data += $this->funciones_sistema->get_userdata();
             $data += $this->funciones_sistema->get_system_params();
+
+            $data['personas'] = $this->persona_model->get_personas($data['id_comunidad'], $data['id_rol']);
 
             $this->load->view('templates/admheader', $data);
             $this->load->view('admin/inicio', $data);
@@ -53,8 +56,8 @@ class Admin extends CI_Controller {
             if ($usuario_db) {
                 $usuario_data = array(
                     'id_usuario' => $usuario_db['id_usuario'],
-                    'id_organizacion' => $usuario_db['id_organizacion'],
-                    'nom_organizacion' => $usuario_db['nom_organizacion'],
+                    'id_comunidad' => $usuario_db['id_comunidad'],
+                    'nom_comunidad' => $usuario_db['nom_comunidad'],
                     'id_rol' => $usuario_db['id_rol'],
                     'nom_usuario' => $usuario_db['nom_usuario'],
                     'usuario' => $usuario_db['usuario'],
