@@ -13,3 +13,7 @@ charset = utf-8
 
 # space indentation (no size specified)
 indent_style = space
+indent_size = 4
+trim_trailing_whitespace = true
+insert_final_newline = true
+

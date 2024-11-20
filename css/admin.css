@@ -2,13 +2,20 @@
 @import url("intro/stylesheet.css");
 
 @font-face {
-    font-family: 'Proxima Nova';                                                                                                                 
+    font-family: 'Proxima Nova';
     src: local('Proxima Nova'), local('Proxima Nova'), url("fonts/Proxima-Nova-Reg.otf") format('opentype');
 }
 @font-face {
     font-family: 'Proxima Nova Bold';
     src: local('Proxima Nova Bold'), local('Proxima Nova Bold'), url("fonts/Proxima-Nova-Bold.otf") format('opentype');
 }
+
+/*
+ * Debug: borde rojo en todos los elementos
+* {
+    border: 1px solid red;
+}
+*/
 
 html {
     position: relative;
@@ -104,7 +111,7 @@ body a:hover {
 }
 
 .footer_margin {
-    height:80px; 
+    height:80px;
 }
 /* FOOTER */
 
@@ -113,6 +120,6 @@ body a:hover {
 }
 
 .boton-eliminar {
-    font-size: 1rem; 
+    font-size: 1rem;
     color: red;
 }

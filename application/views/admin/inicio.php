@@ -5,13 +5,13 @@
 <div class="area-contenido mt-5">
     <div class="row">
         <div class="col-md-4">
-            <?php include "personas.php"; ?>
+            <?php include "persona/ultimas_personas.php"; ?>
         </div>
         <div class="col-md-4">
-            <?php include "operaciones.php"; ?>
+            <?php include "operacion/ultimas_operaciones.php"; ?>
         </div>
         <div class="col-md-4">
-            <?php include "eventos.php"; ?>
+            <?php include "evento/ultimos_eventos.php"; ?>
         </div>
     </div>
 </div>

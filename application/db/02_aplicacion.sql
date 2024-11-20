@@ -45,8 +45,6 @@ DROP TABLE IF EXISTS persona_grado;
 CREATE TABLE persona_grado (
     id_persona integer,
     id_grado integer,
-    id_evento integer,
-    id_otorgante integer,
     fecha date,
     nota text
 );

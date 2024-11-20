@@ -39,6 +39,7 @@ class Funciones_sistema extends CI_Controller {
         $data['tel_org_sitio'] = $this->CI->parametro_sistema_model->get_parametro_sistema_nom('tel_org_sitio');
         $data['correo_org_sitio'] = $this->CI->parametro_sistema_model->get_parametro_sistema_nom('correo_org_sitio');
         $data['logo_org_sitio'] = $this->CI->parametro_sistema_model->get_parametro_sistema_nom('logo_org_sitio');
+
         return $data;
     }
 

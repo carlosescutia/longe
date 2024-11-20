@@ -41,9 +41,9 @@
                         <p><?= $accesos_sistema_item['nom_rol'] ?></p>
                     </div>
                     <div class="col-1 align-self-center">
-                        <?php 
+                        <?php
                         $item_eliminar = $accesos_sistema_item['cod_opcion_sistema'] . " " . $accesos_sistema_item['nom_opcion_sistema'] . " - " . $accesos_sistema_item['nom_rol'] ;
-                        $url = base_url() . "acceso_sistema/eliminar/". $accesos_sistema_item['id_acceso_sistema']; 
+                        $url = base_url() . "acceso_sistema/eliminar/". $accesos_sistema_item['id_acceso_sistema'];
                         ?>
                         <p><a href="#dlg_borrar" data-bs-toggle="modal" onclick="pass_data('<?=$item_eliminar?>', '<?=$url?>')" ><i class="bi bi-x-circle boton-eliminar" ></i>
                         </a></p>

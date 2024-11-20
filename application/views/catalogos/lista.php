@@ -29,11 +29,31 @@
                 ?>
                 <?php
                     $permisos_requeridos = array(
-                    'persona.can_edit',
+                    'grado.can_edit',
                     );
                     if (has_permission_or($permisos_requeridos, $permisos_usuario)) { ?>
                         <div class="col-md-4">
-                            <?php include "persona/boton.php" ?>
+                            <?php include "grado/boton.php" ?>
+                        </div>
+                    <?php }
+                ?>
+                <?php
+                    $permisos_requeridos = array(
+                    'producto.can_edit',
+                    );
+                    if (has_permission_or($permisos_requeridos, $permisos_usuario)) { ?>
+                        <div class="col-md-4">
+                            <?php include "producto/boton.php" ?>
+                        </div>
+                    <?php }
+                ?>
+                <?php
+                    $permisos_requeridos = array(
+                    'forma_pago.can_edit',
+                    );
+                    if (has_permission_or($permisos_requeridos, $permisos_usuario)) { ?>
+                        <div class="col-md-4">
+                            <?php include "forma_pago/boton.php" ?>
                         </div>
                     <?php }
                 ?>

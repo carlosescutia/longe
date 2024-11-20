@@ -47,9 +47,9 @@
                     <p><?= $opciones_sistema_item['otorgable'] ?></p>
                 </div>
                 <div class="col-1 align-self-center">
-                    <?php 
+                    <?php
                     $item_eliminar = $opciones_sistema_item['id_opcion_sistema'] . " " . $opciones_sistema_item['cod_opcion_sistema'] . " " . $opciones_sistema_item['nom_opcion_sistema'] ;
-                    $url = base_url() . "opcion_sistema/eliminar/". $opciones_sistema_item['id_opcion_sistema']; 
+                    $url = base_url() . "opcion_sistema/eliminar/". $opciones_sistema_item['id_opcion_sistema'];
                     ?>
                     <p><a href="#dlg_borrar" data-bs-toggle="modal" onclick="pass_data('<?=$item_eliminar?>', '<?=$url?>')" ><i class="bi bi-x-circle boton-eliminar" ></i>
                     </a></p>

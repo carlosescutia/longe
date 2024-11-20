@@ -1,16 +1,16 @@
 <div class="my-3 pb-2 border-bottom">
     <div class="row">
         <div class="col-9 text-start">
-            <h1 class="h2">Comunidades</h1>
+            <h1 class="h2">Personas</h1>
         </div>
         <div class="col-2 text-end">
             <?php
                 $permisos_requeridos = array(
-                'comunidad.can_add',
+                'persona.can_edit',
                 );
             ?>
             <?php if (has_permission_and($permisos_requeridos, $permisos_usuario)) { ?>
-                <form method="post" action="<?= base_url() ?>comunidad/nuevo">
+                <form method="post" action="<?= base_url() ?>persona/nuevo">
                     <button type="submit" class="btn btn-primary">Nuevo</button>
                 </form>
             <?php } ?>
@@ -20,61 +20,49 @@
 
 <div class="area-contenido">
     <div class="row">
-        <div class="col-12 mx-2">
+        <div class="col-12">
             <div class="row">
                 <div class="col-1 align-self-center">
                     <p class="small"><strong>Clave</strong></p>
                 </div>
-                <div class="col-2 align-self-center">
+                <div class="col-4 align-self-center">
                     <p class="small"><strong>Nombre</strong></p>
                 </div>
-                <div class="col-2 align-self-center">
-                    <p class="small"><strong>Grupo</strong></p>
-                </div>
-                <div class="col-2 align-self-center">
-                    <p class="small"><strong>Responsable</strong></p>
-                </div>
-                <div class="col-2 align-self-center">
-                    <p class="small"><strong>Ciudad</strong></p>
+                <div class="col-3 align-self-center">
+                    <p class="small"><strong>Comunidad</strong></p>
                 </div>
                 <div class="col-1 align-self-center">
-                    <p class="small"><strong>Activa</strong></p>
+                    <p class="small"><strong>Activo</strong></p>
                 </div>
             </div>
         </div>
     </div>
     <div class="row">
-        <?php foreach ($comunidades as $comunidades_item) { ?>
+        <?php foreach ($personas as $personas_item) { ?>
             <div class="col-12 alternate-color mx-2">
                 <div class="row">
                     <div class="col-1 align-self-center">
-                        <p><a href="<?=base_url()?>comunidad/detalle/<?=$comunidades_item['id_comunidad']?>"><?= $comunidades_item['id_comunidad'] ?></a></p>
+                        <p><a href="<?=base_url()?>persona/detalle/<?=$personas_item['id_persona']?>"><?= $personas_item['id_persona'] ?></a></p>
                     </div>
-                    <div class="col-2 align-self-center">
-                        <p><a href="<?=base_url()?>comunidad/detalle/<?=$comunidades_item['id_comunidad']?>"><?= $comunidades_item['nom_comunidad'] ?></a></p>
+                    <div class="col-4 align-self-center">
+                        <p><a href="<?=base_url()?>persona/detalle/<?=$personas_item['id_persona']?>"><?= $personas_item['nom_persona'] ?></a></p>
                     </div>
-                    <div class="col-2 align-self-center">
-                        <p><?= $comunidades_item['nom_grupo'] ?></p>
-                    </div>
-                    <div class="col-2 align-self-center">
-                        <p><?= $comunidades_item['nom_responsable'] ?></p>
-                    </div>
-                    <div class="col-2 align-self-center">
-                        <p><?= $comunidades_item['ciudad'] ?></p>
+                    <div class="col-3 align-self-center">
+                        <p><?= $personas_item['nom_comunidad'] ?></p>
                     </div>
                     <div class="col-1 align-self-center">
-                        <p><?= $comunidades_item['activo'] ?></p>
+                        <p><?= $personas_item['activo'] ?></p>
                     </div>
                     <div class="col-1 align-self-center">
                         <?php
                             $permisos_requeridos = array(
-                            'comunidad.can_delete',
+                            'persona.can_edit',
                             );
                         ?>
                         <?php if (has_permission_and($permisos_requeridos, $permisos_usuario)) { ?>
                             <?php
-                                $item_eliminar = $comunidades_item['id_comunidad'] . " " . $comunidades_item['nom_comunidad'] ;
-                                $url = base_url() . "comunidad/eliminar/". $comunidades_item['id_comunidad'];
+                                $item_eliminar = $personas_item['id_persona'] . " " . $personas_item['nom_persona'] ;
+                                $url = base_url() . "persona/eliminar/". $personas_item['id_persona'];
                             ?>
                             <p><a href="#dlg_borrar" data-bs-toggle="modal" onclick="pass_data('<?=$item_eliminar?>', '<?=$url?>')" ><i class="bi bi-x-circle boton-eliminar" ></i>
                             </a></p>
@@ -89,7 +77,7 @@
 <hr />
 
 <div class="form-group row">
-    <div class="col-10">
-        <a href="<?=base_url()?>catalogos" class="btn btn-secondary">Volver</a>
+    <div class="col-sm-10">
+        <a href="<?=base_url()?>admin" class="btn btn-secondary">Volver</a>
     </div>
 </div>

@@ -41,9 +41,9 @@
                         <p><?= $tallas_yazbek_item['orden'] ?></p>
                     </div>
                     <div class="col-1">
-                        <?php 
+                        <?php
                             $item_eliminar = $tallas_yazbek_item['id_talla_yazbek'] . " " . $tallas_yazbek_item['nom_talla_yazbek'] ;
-                            $url = base_url() . "talla_yazbek/eliminar/". $tallas_yazbek_item['id_talla_yazbek']; 
+                            $url = base_url() . "talla_yazbek/eliminar/". $tallas_yazbek_item['id_talla_yazbek'];
                         ?>
                         <p><a href="#dlg_borrar" data-bs-toggle="modal" onclick="pass_data('<?=$item_eliminar?>', '<?=$url?>')" ><i class="bi bi-x-circle boton-eliminar" ></i>
                         </a></p>

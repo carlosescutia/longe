@@ -8,6 +8,9 @@ class Persona extends CI_Controller {
         $this->load->model('persona_model');
         $this->load->model('comunidad_model');
         $this->load->model('talla_yazbek_model');
+        $this->load->model('grado_model');
+        $this->load->model('persona_grado_model');
+        $this->load->model('operacion_model');
     }
 
     public function index()
@@ -18,14 +21,14 @@ class Persona extends CI_Controller {
             $data += $this->funciones_sistema->get_system_params();
 
             $permisos_requeridos = array(
-                'persona.can_edit',
+                'persona.can_view',
             );
             if (has_permission_or($permisos_requeridos, $data['permisos_usuario'])) {
                 $data['personas'] = $this->persona_model->get_personas($data['id_comunidad'], $data['id_rol']);
 
                 $this->load->view('templates/admheader', $data);
                 $this->load->view('templates/dlg_borrar');
-                $this->load->view('catalogos/persona/lista', $data);
+                $this->load->view('admin/persona/lista', $data);
                 $this->load->view('templates/footer', $data);
             } else {
                 redirect(base_url() . 'admin');
@@ -43,16 +46,23 @@ class Persona extends CI_Controller {
             $data += $this->funciones_sistema->get_system_params();
 
             $permisos_requeridos = array(
-                'persona.can_edit',
+                'persona.can_view',
             );
             if (has_permission_or($permisos_requeridos, $data['permisos_usuario'])) {
                 $data['persona'] = $this->persona_model->get_persona($id_persona);
                 $data['comunidades'] = $this->comunidad_model->get_comunidades($data['id_comunidad'], $data['id_rol']);
                 $data['instructores'] = $this->persona_model->get_instructores($data['id_comunidad'], $data['id_rol']);
                 $data['tallas_yazbek'] = $this->talla_yazbek_model->get_tallas_yazbek();
+                $data['grados'] = $this->grado_model->get_grados();
+                $data['persona_grados'] = $this->persona_grado_model->get_persona_grados($id_persona);
+                $data['operaciones'] = $this->operacion_model->get_operaciones_persona($id_persona);
+
+                $this->session->set_userdata('previous_url', current_url());
 
                 $this->load->view('templates/admheader', $data);
-                $this->load->view('catalogos/persona/detalle', $data);
+                $this->load->view('templates/dlg_borrar');
+                $this->load->view('templates/dlg_borrar_archivo');
+                $this->load->view('admin/persona/detalle', $data);
                 $this->load->view('templates/footer', $data);
             } else {
                 redirect(base_url() . 'admin');

@@ -9,7 +9,7 @@ class Persona_model extends CI_Model {
         if ($id_rol == 'adm') {
             $id_comunidad = '%';
         }
-        $sql = 'select p.*, c.nom_comunidad from persona p left join comunidad c on c.id_comunidad = p.id_comunidad where p.id_comunidad::text LIKE ? ';
+        $sql = 'select p.*, c.nom_comunidad from persona p left join comunidad c on c.id_comunidad = p.id_comunidad where p.activo = 1 and p.id_comunidad::text LIKE ? ';
         if ($id_rol == 'adm') {
             $sql .= 'or p.id_comunidad is null ';
         }
@@ -19,8 +19,14 @@ class Persona_model extends CI_Model {
     }
 
     public function get_persona($id_persona) {
-        $sql = 'select *, nom_persona from persona where id_persona = ?;';
+        $sql = 'select * from persona where id_persona = ?;';
         $query = $this->db->query($sql, array($id_persona));
+        return $query->row_array();
+    }
+
+    public function get_ultima_persona($id_comunidad) {
+        $sql = 'select * from persona where id_comunidad::text LIKE ? and activo = 1 order by id_persona desc limit 1';
+        $query = $this->db->query($sql, array($id_comunidad));
         return $query->row_array();
     }
 

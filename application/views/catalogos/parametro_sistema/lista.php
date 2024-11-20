@@ -41,9 +41,9 @@
                         <p><?= $parametros_sistema_item['valor'] ?></a></p>
                     </div>
                     <div class="col-1 align-self-center">
-                        <?php 
-                        $item_eliminar = $parametros_sistema_item['id_parametro_sistema'] . " " . $parametros_sistema_item['nom_parametro_sistema']; 
-                        $url = base_url() . "parametro_sistema/eliminar/". $parametros_sistema_item['id_parametro_sistema']; 
+                        <?php
+                        $item_eliminar = $parametros_sistema_item['id_parametro_sistema'] . " " . $parametros_sistema_item['nom_parametro_sistema'];
+                        $url = base_url() . "parametro_sistema/eliminar/". $parametros_sistema_item['id_parametro_sistema'];
                         ?>
                         <p><a href="#dlg_borrar" data-bs-toggle="modal" onclick="pass_data('<?=$item_eliminar?>', '<?=$url?>')" ><i class="bi bi-x-circle boton-eliminar" ></i>
                         </a></p>

@@ -14,7 +14,7 @@
         <div class="form-group row">
             <label for="id_comunidad" class="col-sm-2 col-form-label">Clave</label>
             <div class="col-sm-1">
-                <input type="text" class="form-control" name="id_comunidad" id="id_comunidad" value="<?=$comunidad['id_comunidad'] ?>">
+                <input type="text" class="form-control" name="id_comunidad" id="id_comunidad" value="<?=$comunidad['id_comunidad'] ?>" readonly>
             </div>
         </div>
         <div class="form-group row">

@@ -7,6 +7,7 @@ class Admin extends CI_Controller {
         $this->load->library('funciones_sistema');
         $this->load->model('usuario_model');
         $this->load->model('persona_model');
+        $this->load->model('operacion_model');
     }
 
     public function index()
@@ -17,6 +18,7 @@ class Admin extends CI_Controller {
             $data += $this->funciones_sistema->get_system_params();
 
             $data['personas'] = $this->persona_model->get_personas($data['id_comunidad'], $data['id_rol']);
+            $data['operaciones'] = $this->operacion_model->get_operaciones($data['id_comunidad'], $data['id_rol']);
 
             $this->load->view('templates/admheader', $data);
             $this->load->view('admin/inicio', $data);

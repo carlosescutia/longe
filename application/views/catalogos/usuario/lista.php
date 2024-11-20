@@ -65,9 +65,9 @@
                     <p><?= $usuarios_item['activo'] ?></p>
                 </div>
                 <div class="col-1 align-self-center">
-                    <?php 
+                    <?php
                     $item_eliminar = $usuarios_item['id_usuario'] ." " . $usuarios_item['nom_usuario'] . " - " . $usuarios_item['nom_comunidad'] ;
-                    $url = base_url() . "usuario/eliminar/". $usuarios_item['id_usuario']; 
+                    $url = base_url() . "usuario/eliminar/". $usuarios_item['id_usuario'];
                     ?>
                     <p><a href="#dlg_borrar" data-bs-toggle="modal" onclick="pass_data('<?=$item_eliminar?>', '<?=$url?>')" ><i class="bi bi-x-circle boton-eliminar" ></i>
                     </a></p>
