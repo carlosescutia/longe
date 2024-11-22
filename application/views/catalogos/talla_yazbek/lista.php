@@ -21,8 +21,11 @@
                 <div class="col-3 align-self-center">
                     <p class="small"><strong>Nombre</strong></p>
                 </div>
-                <div class="col-2 align-self-center">
+                <div class="col-1 align-self-center">
                     <p class="small"><strong>Orden</strong></p>
+                </div>
+                <div class="col-1 align-self-center">
+                    <p class="small"><strong>Activo</strong></p>
                 </div>
             </div>
         </div>
@@ -37,8 +40,11 @@
                     <div class="col-3 align-self-center">
                         <p><a href="<?=base_url()?>talla_yazbek/detalle/<?=$tallas_yazbek_item['id_talla_yazbek']?>"><?= $tallas_yazbek_item['nom_talla_yazbek'] ?></a></p>
                     </div>
-                    <div class="col-2 align-self-center">
+                    <div class="col-1 align-self-center">
                         <p><?= $tallas_yazbek_item['orden'] ?></p>
+                    </div>
+                    <div class="col-1 align-self-center">
+                        <p><?= $tallas_yazbek_item['activo'] ?></p>
                     </div>
                     <div class="col-1">
                         <?php

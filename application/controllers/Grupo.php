@@ -104,6 +104,7 @@ class Grupo extends CI_Controller {
                 // guardado
                 $data = array(
                     'nom_grupo' => $grupo['nom_grupo'],
+                    'activo' => empty($grupo['activo']) ? null : $grupo['activo'],
                 );
                 $id_grupo = $this->grupo_model->guardar($data, $id_grupo);
 

@@ -6,7 +6,13 @@ class Talla_yazbek_model extends CI_Model {
     }
 
     public function get_tallas_yazbek() {
-        $sql = 'select * from talla_yazbek order by orden ';
+        $sql = 'select * from talla_yazbek order by activo, orden ';
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
+
+    public function get_tallas_yazbek_activas() {
+        $sql = 'select * from talla_yazbek where activo = 1 order by orden ';
         $query = $this->db->query($sql);
         return $query->result_array();
     }

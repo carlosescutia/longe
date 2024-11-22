@@ -47,7 +47,7 @@ class Comunidad extends CI_Controller {
             );
             if (has_permission_or($permisos_requeridos, $data['permisos_usuario'])) {
                 $data['comunidad'] = $this->comunidad_model->get_comunidad($id_comunidad);
-                $data['grupos'] = $this->grupo_model->get_grupos();
+                $data['grupos'] = $this->grupo_model->get_grupos_activos();
                 $data['instructores'] = $this->persona_model->get_instructores($data['id_comunidad'], $data['id_rol']);
 
                 $this->load->view('templates/admheader', $data);
@@ -114,6 +114,7 @@ class Comunidad extends CI_Controller {
                     'telefono' => $comunidad['telefono'],
                     'ciudad' => $comunidad['ciudad'],
                     'activo' => empty($comunidad['activo']) ? null : $comunidad['activo'],
+                    'mensaje' => $comunidad['mensaje'],
                 );
                 $id_comunidad = $this->comunidad_model->guardar($data, $id_comunidad);
 

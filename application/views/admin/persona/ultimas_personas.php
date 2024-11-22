@@ -21,7 +21,7 @@
                             </tr>
                             <?php
                                 $num_registros += 1;
-                                if ($num_registros == 3) break;
+                                if ($num_registros == 30) break;
                             ?>
                         <?php } ?>
                         <tr>

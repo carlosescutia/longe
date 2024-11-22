@@ -44,6 +44,22 @@ class Operacion_model extends CI_Model {
         return $query->result_array();
     }
 
+    public function get_operaciones_evento($id_evento) {
+        $sql = ""
+            ."select "
+            ."o.*, pe.nom_persona, pr.nom_producto "
+            ."from "
+            ."operacion o "
+            ."left join persona pe on pe.id_persona = o.id_persona "
+            ."left join producto pr on pr.id_producto = o.id_producto "
+            ."where "
+            ."pr.id_evento = ? "
+            ."";
+        $sql .= 'order by o.id_operacion desc ';
+        $query = $this->db->query($sql, array($id_evento));
+        return $query->result_array();
+    }
+
     public function get_operacion($id_operacion) {
         $sql = 'select * from operacion where id_operacion = ?;';
         $query = $this->db->query($sql, array($id_operacion));

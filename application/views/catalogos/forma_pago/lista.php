@@ -21,8 +21,11 @@
                 <div class="col-2 align-self-center">
                     <p class="small"><strong>Nombre</strong></p>
                 </div>
-                <div class="col-2 align-self-center">
+                <div class="col-1 align-self-center">
                     <p class="small"><strong>Orden</strong></p>
+                </div>
+                <div class="col-1 align-self-center">
+                    <p class="small"><strong>Activo</strong></p>
                 </div>
             </div>
         </div>
@@ -37,8 +40,11 @@
                     <div class="col-2 align-self-center">
                         <p><a href="<?=base_url()?>forma_pago/detalle/<?=$formas_pago_item['id_forma_pago']?>"><?= $formas_pago_item['nom_forma_pago'] ?></a></p>
                     </div>
-                    <div class="col-2 align-self-center">
+                    <div class="col-1 align-self-center">
                         <p><?= $formas_pago_item['orden'] ?></p>
+                    </div>
+                    <div class="col-1 align-self-center">
+                        <p><?= $formas_pago_item['activo'] ?></p>
                     </div>
                     <div class="col-1 align-self-center">
                         <?php

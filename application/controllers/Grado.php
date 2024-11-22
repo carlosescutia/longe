@@ -105,6 +105,7 @@ class Grado extends CI_Controller {
                 $data = array(
                     'nom_grado' => $grado['nom_grado'],
                     'orden' => $grado['orden'],
+                    'activo' => empty($grado['activo']) ? null : $grado['activo'],
                 );
                 $id_grado = $this->grado_model->guardar($data, $id_grado);
 

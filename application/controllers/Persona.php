@@ -50,10 +50,10 @@ class Persona extends CI_Controller {
             );
             if (has_permission_or($permisos_requeridos, $data['permisos_usuario'])) {
                 $data['persona'] = $this->persona_model->get_persona($id_persona);
-                $data['comunidades'] = $this->comunidad_model->get_comunidades($data['id_comunidad'], $data['id_rol']);
+                $data['comunidades'] = $this->comunidad_model->get_comunidades_activas($data['id_comunidad'], $data['id_rol']);
                 $data['instructores'] = $this->persona_model->get_instructores($data['id_comunidad'], $data['id_rol']);
-                $data['tallas_yazbek'] = $this->talla_yazbek_model->get_tallas_yazbek();
-                $data['grados'] = $this->grado_model->get_grados();
+                $data['tallas_yazbek'] = $this->talla_yazbek_model->get_tallas_yazbek_activas();
+                $data['grados'] = $this->grado_model->get_grados_activos();
                 $data['persona_grados'] = $this->persona_grado_model->get_persona_grados($id_persona);
                 $data['operaciones'] = $this->operacion_model->get_operaciones_persona($id_persona);
 

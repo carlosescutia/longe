@@ -13,6 +13,20 @@ class Producto_model extends CI_Model {
         if ($id_rol == 'adm') {
             $sql .= 'or p.id_comunidad is null ';
         }
+        $sql .= 'order by p.activo, p.nom_producto ';
+        $query = $this->db->query($sql, $id_comunidad);
+        return $query->result_array();
+    }
+
+    public function get_productos_activos($id_comunidad, $id_rol) {
+        if ($id_rol == 'adm') {
+            $id_comunidad = '%';
+        }
+        $sql = 'select p.*, c.nom_comunidad from producto p left join comunidad c on c.id_comunidad = p.id_comunidad where p.activo = 1 and p.id_comunidad::text LIKE ? ';
+        if ($id_rol == 'adm') {
+            $sql .= 'or p.id_comunidad is null ';
+        }
+        $sql .= 'order by p.nom_producto ';
         $query = $this->db->query($sql, $id_comunidad);
         return $query->result_array();
     }

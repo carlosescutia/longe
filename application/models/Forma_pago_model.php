@@ -6,7 +6,13 @@ class Forma_pago_model extends CI_Model {
     }
 
     public function get_formas_pago() {
-        $sql = 'select fp.* from forma_pago fp order by orden ';
+        $sql = 'select fp.* from forma_pago fp order by activo, orden ';
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
+
+    public function get_formas_pago_activas() {
+        $sql = 'select fp.* from forma_pago fp where activo = 1 order by orden ';
         $query = $this->db->query($sql);
         return $query->result_array();
     }

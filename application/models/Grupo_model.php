@@ -6,7 +6,13 @@ class Grupo_model extends CI_Model {
     }
 
     public function get_grupos() {
-        $sql = 'select *, nom_grupo from grupo order by id_grupo;';
+        $sql = 'select *, nom_grupo from grupo order by activo, nom_grupo;';
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
+
+    public function get_grupos_activos() {
+        $sql = 'select *, nom_grupo from grupo where activo = 1 order by nom_grupo;';
         $query = $this->db->query($sql);
         return $query->result_array();
     }

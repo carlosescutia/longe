@@ -6,7 +6,13 @@ class Grado_model extends CI_Model {
     }
 
     public function get_grados() {
-        $sql = 'select * from grado order by orden ';
+        $sql = 'select * from grado order by activo, orden ';
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
+
+    public function get_grados_activos() {
+        $sql = 'select * from grado where activo = 1 order by orden ';
         $query = $this->db->query($sql);
         return $query->result_array();
     }

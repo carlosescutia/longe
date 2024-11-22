@@ -48,7 +48,7 @@ class Usuario extends CI_Controller {
             if (has_permission_or($permisos_requeridos, $data['permisos_usuario'])) {
                 $data['usuario'] = $this->usuario_model->get_usuario($id_usuario);
                 $data['roles'] = $this->rol_model->get_roles();
-                $data['comunidades'] = $this->comunidad_model->get_comunidades($data['id_comunidad'], $data['id_rol']);
+                $data['comunidades'] = $this->comunidad_model->get_comunidades_activas($data['id_comunidad'], $data['id_rol']);
                 $data['accesos_sistema_rol'] = $this->acceso_sistema_model->get_accesos_sistema_rol_usuario($id_usuario);
                 $data['accesos_sistema_usuario'] = $this->acceso_sistema_usuario_model->get_accesos_sistema_usuario($id_usuario);
                 $data['opciones_sistema_otorgables'] = $this->opcion_sistema_model->get_opciones_sistema_otorgables();

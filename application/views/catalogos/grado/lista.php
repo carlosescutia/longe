@@ -24,6 +24,9 @@
                 <div class="col-2 align-self-center">
                     <p class="small"><strong>Orden</strong></p>
                 </div>
+                <div class="col-2 align-self-center">
+                    <p class="small"><strong>Activo</strong></p>
+                </div>
             </div>
         </div>
     </div>
@@ -39,6 +42,9 @@
                     </div>
                     <div class="col-2 align-self-center">
                         <p><?= $grados_item['orden'] ?></p>
+                    </div>
+                    <div class="col-2 align-self-center">
+                        <p><?= $grados_item['activo'] ?></p>
                     </div>
                     <div class="col-1">
                         <?php

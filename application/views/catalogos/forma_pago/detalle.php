@@ -14,9 +14,13 @@
                         <label for="nom_forma_pago" class="form-label">Nombre</label>
                         <input type="text" class="form-control" name="nom_forma_pago" id="nom_forma_pago" value="<?=$forma_pago['nom_forma_pago'] ?>">
                     </div>
-                    <div class="col-sm-2 mb-3">
+                    <div class="col-sm-1 mb-3">
                         <label for="orden" class="form-label">Orden</label>
                         <input type="text" class="form-control" name="orden" id="orden" value="<?=$forma_pago['orden'] ?>">
+                    </div>
+                    <div class="col-sm-1 mb-3">
+                        <label for="activo" class="form-label">Activo</label>
+                        <input type="text" class="form-control" name="activo" id="activo" value="<?=$forma_pago['activo'] ?>">
                     </div>
                 </div>
             </form>

@@ -25,8 +25,14 @@
         </div>
         <div class="form-group row">
             <label for="orden" class="col-sm-2 col-form-label">Orden</label>
-            <div class="col-sm-4">
+            <div class="col-sm-1">
                 <input type="text" class="form-control" name="orden" id="orden" value="<?=$talla_yazbek['orden'] ?>">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="activo" class="col-sm-2 col-form-label">Activo</label>
+            <div class="col-sm-1">
+                <input type="text" class="form-control" name="activo" id="activo" value="<?=$talla_yazbek['activo'] ?>">
             </div>
         </div>
     </div>

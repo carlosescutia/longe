@@ -105,6 +105,7 @@ class Forma_pago extends CI_Controller {
                 $data = array(
                     'nom_forma_pago' => $forma_pago['nom_forma_pago'],
                     'orden' => $forma_pago['orden'],
+                    'activo' => empty($forma_pago['activo']) ? null : $forma_pago['activo'],
                 );
                 $id_forma_pago = $this->forma_pago_model->guardar($data, $id_forma_pago);
 

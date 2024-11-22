@@ -51,10 +51,10 @@ class Operacion extends CI_Controller {
             );
             if (has_permission_or($permisos_requeridos, $data['permisos_usuario'])) {
                 $data['operacion'] = $this->operacion_model->get_operacion($id_operacion);
-                $data['comunidades'] = $this->comunidad_model->get_comunidades($data['id_comunidad'], $data['id_rol']);
-                $data['personas'] = $this->persona_model->get_personas($data['id_comunidad'], $data['id_rol']);
-                $data['productos'] = $this->producto_model->get_productos($data['id_comunidad'], $data['id_rol']);
-                $data['formas_pago'] = $this->forma_pago_model->get_formas_pago($data['id_comunidad'], $data['id_rol']);
+                $data['comunidades'] = $this->comunidad_model->get_comunidades_activas($data['id_comunidad'], $data['id_rol']);
+                $data['personas'] = $this->persona_model->get_personas_activas($data['id_comunidad'], $data['id_rol']);
+                $data['productos'] = $this->producto_model->get_productos_activos($data['id_comunidad'], $data['id_rol']);
+                $data['formas_pago'] = $this->forma_pago_model->get_formas_pago_activas($data['id_comunidad'], $data['id_rol']);
                 $data['previous_url'] = $this->session->userdata('previous_url');
 
                 $this->load->view('templates/admheader', $data);
@@ -78,9 +78,9 @@ class Operacion extends CI_Controller {
                 'operacion.can_edit',
             );
             if (has_permission_or($permisos_requeridos, $data['permisos_usuario'])) {
-                $curr_persona = $this->input->post();
-                if (!empty($curr_persona['id_persona'])) {
-                    $new_persona = $curr_persona['id_persona'] ;
+                $operacion = $this->input->post();
+                if (!empty($operacion['id_persona'])) {
+                    $new_persona = $operacion['id_persona'] ;
                 } else {
                     $new_persona = $this->persona_model->get_ultima_persona($data['id_comunidad'])['id_persona'];
                 }

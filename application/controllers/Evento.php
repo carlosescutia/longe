@@ -1,11 +1,12 @@
 <?php
-class Talla_yazbek extends CI_Controller {
+class Evento extends CI_Controller {
 
     public function __construct()
     {
         parent::__construct();
         $this->load->library('funciones_sistema');
-        $this->load->model('talla_yazbek_model');
+        $this->load->model('evento_model');
+        $this->load->model('operacion_model');
     }
 
     public function index()
@@ -16,14 +17,14 @@ class Talla_yazbek extends CI_Controller {
             $data += $this->funciones_sistema->get_system_params();
 
             $permisos_requeridos = array(
-                'talla_yazbek.can_edit',
+                'evento.can_view',
             );
             if (has_permission_or($permisos_requeridos, $data['permisos_usuario'])) {
-                $data['tallas_yazbek'] = $this->talla_yazbek_model->get_tallas_yazbek();
+                $data['eventos'] = $this->evento_model->get_eventos($data['id_comunidad'], $data['id_rol']);
 
                 $this->load->view('templates/admheader', $data);
                 $this->load->view('templates/dlg_borrar');
-                $this->load->view('catalogos/talla_yazbek/lista', $data);
+                $this->load->view('admin/evento/lista', $data);
                 $this->load->view('templates/footer', $data);
             } else {
                 redirect(base_url() . 'admin');
@@ -33,7 +34,7 @@ class Talla_yazbek extends CI_Controller {
         }
     }
 
-    public function detalle($id_talla_yazbek)
+    public function detalle($id_evento)
     {
         if ($this->session->userdata('logueado')) {
             $data = [];
@@ -41,13 +42,18 @@ class Talla_yazbek extends CI_Controller {
             $data += $this->funciones_sistema->get_system_params();
 
             $permisos_requeridos = array(
-                'talla_yazbek.can_edit',
+                'evento.can_view',
             );
             if (has_permission_or($permisos_requeridos, $data['permisos_usuario'])) {
-                $data['talla_yazbek'] = $this->talla_yazbek_model->get_talla_yazbek($id_talla_yazbek);
+                $data['evento'] = $this->evento_model->get_evento($id_evento);
+                $data['operaciones'] = $this->operacion_model->get_operaciones_evento($id_evento);
+
+                $this->session->set_userdata('previous_url', current_url());
 
                 $this->load->view('templates/admheader', $data);
-                $this->load->view('catalogos/talla_yazbek/detalle', $data);
+                $this->load->view('templates/dlg_borrar');
+                $this->load->view('templates/dlg_borrar_archivo');
+                $this->load->view('admin/evento/detalle', $data);
                 $this->load->view('templates/footer', $data);
             } else {
                 redirect(base_url() . 'admin');
@@ -64,22 +70,22 @@ class Talla_yazbek extends CI_Controller {
             $data += $this->funciones_sistema->get_userdata();
 
             $permisos_requeridos = array(
-                'talla_yazbek.can_edit',
+                'evento.can_edit',
             );
             if (has_permission_or($permisos_requeridos, $data['permisos_usuario'])) {
                 // guardado
                 $data = array(
-                    'nom_talla_yazbek' => null,
+                    'id_comunidad' => $data['id_comunidad'],
                 );
-                $id_talla_yazbek = $this->talla_yazbek_model->guardar($data, null);
+                $id_evento = $this->evento_model->guardar($data, null);
 
                 // registro en bitacora
                 $accion = 'agregó';
-                $entidad = 'talla_yazbek';
-                $valor = $id_talla_yazbek;
+                $entidad = 'evento';
+                $valor = $id_evento;
                 $this->funciones_sistema->registro_bitacora($accion, $entidad, $valor);
 
-                $this->detalle($id_talla_yazbek);
+                $this->detalle($id_evento);
 
             } else {
                 redirect(base_url() . 'admin');
@@ -89,53 +95,56 @@ class Talla_yazbek extends CI_Controller {
         }
     }
 
-    public function guardar($id_talla_yazbek=null)
+    public function guardar($id_evento=null)
     {
         if ($this->session->userdata('logueado')) {
 
-            $talla_yazbek = $this->input->post();
-            if ($talla_yazbek) {
+            $evento = $this->input->post();
+            if ($evento) {
 
-                if ($id_talla_yazbek) {
+                if ($id_evento) {
                     $accion = 'modificó';
                 } else {
                     $accion = 'agregó';
                 }
                 // guardado
                 $data = array(
-                    'nom_talla_yazbek' => $talla_yazbek['nom_talla_yazbek'],
-                    'orden' => $talla_yazbek['orden'],
-                    'activo' => empty($talla_yazbek['activo']) ? null : $talla_yazbek['activo'],
+                    'id_comunidad' => empty($evento['id_comunidad']) ? null : $evento['id_comunidad'],
+                    'nom_evento' => $evento['nom_evento'],
+                    'fecha_ini' => empty($evento['fecha_ini']) ? null : $evento['fecha_ini'],
+                    'fecha_fin' => empty($evento['fecha_fin']) ? null : $evento['fecha_fin'],
+                    'lugar' => $evento['lugar'],
+                    'activo' => empty($evento['activo']) ? null : $evento['activo'],
                 );
-                $id_talla_yazbek = $this->talla_yazbek_model->guardar($data, $id_talla_yazbek);
+                $id_evento = $this->evento_model->guardar($data, $id_evento);
 
                 // registro en bitacora
-                $entidad = 'talla_yazbek';
-                $valor = $id_talla_yazbek . " " . $talla_yazbek['nom_talla_yazbek'];
+                $entidad = 'evento';
+                $valor = $id_evento . " " . $evento['nom_evento'];
                 $this->funciones_sistema->registro_bitacora($accion, $entidad, $valor);
 
             }
-            redirect(base_url() . 'talla_yazbek');
+            redirect(base_url() . 'evento');
 
         } else {
             redirect(base_url() . 'admin/login');
         }
     }
 
-    public function eliminar($id_talla_yazbek)
+    public function eliminar($id_evento)
     {
         if ($this->session->userdata('logueado')) {
 
             // registro en bitacora
-            $talla_yazbek = $this->talla_yazbek_model->get_talla_yazbek($id_talla_yazbek);
+            $evento = $this->evento_model->get_evento($id_evento);
             $accion = 'eliminó';
-            $entidad = 'talla_yazbek';
-            $valor = $id_talla_yazbek . " " . $talla_yazbek['nom_talla_yazbek'];
+            $entidad = 'evento';
+            $valor = $id_evento . " " . $evento['nom_evento'];
             $this->funciones_sistema->registro_bitacora($accion, $entidad, $valor);
 
             // eliminado
-            $this->talla_yazbek_model->eliminar($id_talla_yazbek);
-            redirect(base_url() . 'talla_yazbek');
+            $this->evento_model->eliminar($id_evento);
+            redirect(base_url() . 'evento');
 
         } else {
             redirect(base_url() . 'admin/login');

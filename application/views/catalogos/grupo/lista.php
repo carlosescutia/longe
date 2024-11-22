@@ -21,6 +21,9 @@
                 <div class="col-4 align-self-center">
                     <p class="small"><strong>Nombre</strong></p>
                 </div>
+                <div class="col-1 align-self-center">
+                    <p class="small"><strong>Activo</strong></p>
+                </div>
             </div>
         </div>
     </div>
@@ -33,6 +36,9 @@
                     </div>
                     <div class="col-4 align-self-center">
                         <p><a href="<?=base_url()?>grupo/detalle/<?=$grupos_item['id_grupo']?>"><?= $grupos_item['nom_grupo'] ?></a></p>
+                    </div>
+                    <div class="col-1 align-self-center">
+                        <p><?= $grupos_item['activo'] ?></p>
                     </div>
                     <div class="col-1">
                         <?php

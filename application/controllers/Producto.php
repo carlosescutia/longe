@@ -6,6 +6,7 @@ class Producto extends CI_Controller {
         parent::__construct();
         $this->load->library('funciones_sistema');
         $this->load->model('producto_model');
+        $this->load->model('evento_model');
     }
 
     public function index()
@@ -45,6 +46,7 @@ class Producto extends CI_Controller {
             );
             if (has_permission_or($permisos_requeridos, $data['permisos_usuario'])) {
                 $data['producto'] = $this->producto_model->get_producto($id_producto);
+                $data['eventos'] = $this->evento_model->get_eventos_activos($data['id_comunidad'], $data['id_rol']);
 
                 $this->load->view('templates/admheader', $data);
                 $this->load->view('catalogos/producto/detalle', $data);
@@ -108,6 +110,7 @@ class Producto extends CI_Controller {
                     'nom_producto' => $producto['nom_producto'],
                     'precio' => empty($producto['precio']) ? null : $producto['precio'],
                     'activo' => empty($producto['activo']) ? null : $producto['activo'],
+                    'id_evento' => empty($producto['id_evento']) ? null : $producto['id_evento'],
                 );
                 $id_producto = $this->producto_model->guardar($data, $id_producto);
 

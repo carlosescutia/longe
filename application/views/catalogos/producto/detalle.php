@@ -26,6 +26,15 @@
                         <label for="activo" class="form-label">Activo</label>
                         <input type="text" class="form-control" name="activo" id="activo" value="<?=$producto['activo'] ?>">
                     </div>
+                    <div class="col-sm-4 mb-3">
+                        <label for="id_evento" class="form-label">Evento</label>
+                        <select class="form-select" name="id_evento" id="id_evento">
+                            <option value="" <?= ($producto['id_evento'] == '') ? 'selected' : '' ?> >Seleccione evento</option>
+                            <?php foreach ($eventos as $eventos_item) { ?>
+                                <option value="<?= $eventos_item['id_evento'] ?>" <?= ($producto['id_evento'] == $eventos_item['id_evento']) ? 'selected' : '' ?> ><?= $eventos_item['nom_evento'] ?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
                     <input type="hidden" name="id_comunidad" id="id_comunidad" value="<?=$id_comunidad ?>">
                 </div>
             </form>

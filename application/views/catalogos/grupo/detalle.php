@@ -23,6 +23,12 @@
                 <input type="text" class="form-control" name="nom_grupo" id="nom_grupo" value="<?=$grupo['nom_grupo'] ?>">
             </div>
         </div>
+        <div class="form-group row">
+            <label for="activo" class="col-sm-2 col-form-label">Activo</label>
+            <div class="col-sm-1">
+                <input type="text" class="form-control" name="activo" id="activo" value="<?=$grupo['activo'] ?>">
+            </div>
+        </div>
     </div>
 </form>
 

@@ -9,11 +9,24 @@ class Persona_model extends CI_Model {
         if ($id_rol == 'adm') {
             $id_comunidad = '%';
         }
+        $sql = 'select p.*, c.nom_comunidad from persona p left join comunidad c on c.id_comunidad = p.id_comunidad where p.id_comunidad::text LIKE ? ';
+        if ($id_rol == 'adm') {
+            $sql .= 'or p.id_comunidad is null ';
+        }
+        $sql .= 'order by activo, p.nom_persona ';
+        $query = $this->db->query($sql, $id_comunidad);
+        return $query->result_array();
+    }
+
+    public function get_personas_activas($id_comunidad, $id_rol) {
+        if ($id_rol == 'adm') {
+            $id_comunidad = '%';
+        }
         $sql = 'select p.*, c.nom_comunidad from persona p left join comunidad c on c.id_comunidad = p.id_comunidad where p.activo = 1 and p.id_comunidad::text LIKE ? ';
         if ($id_rol == 'adm') {
             $sql .= 'or p.id_comunidad is null ';
         }
-        $sql .= 'order by p.fecha_ingreso desc ';
+        $sql .= 'order by p.nom_persona ';
         $query = $this->db->query($sql, $id_comunidad);
         return $query->result_array();
     }
